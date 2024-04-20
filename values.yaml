@@ -1,0 +1,12 @@
+fullnameOverride: 
+
+service:
+  name:
+  type: 
+  port:
+
+deployment:
+  name:
+  replicas:
+  port:
+  echo:

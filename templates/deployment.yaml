@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "echoapp.deployment.name" . }}
+  labels:
+    app: {{ include "echoapp.fullname" . }}
+spec:
+  replicas: {{ default 1 .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ include "echoapp.deployment.name" . }}-app
+  template:
+    metadata:
+      labels:
+        app: {{ include "echoapp.deployment.name" . }}-app
+    spec:
+      containers:
+        - name: {{ include "echoapp.deployment.name" . }}-container
+          image: hashicorp/http-echo:1.0.0
+          args:
+            - -text="{{ default "HelloCloud version 1" .Values.deployment.echo }}"
+            - -listen=:{{ include "echoapp.deployment.port" . }}
+          ports:
+            - containerPort: {{ include "echoapp.deployment.port" . }}

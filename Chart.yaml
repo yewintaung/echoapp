@@ -1,0 +1,11 @@
+apiVersion: v2 # API version of helm, not helm cli version
+name: echoapp
+description: A Helm chart for echoapp microservice
+type: application
+# This is the chart version. This version number should be incremented each time you make changes
+# to the chart and its templates, including the app version.
+version: 0.1.0 #helm chart version
+ 
+appVersion: "0.1.0" # the version number of the currency-app. It is recommended to use it with quotes., your app version
+
+# Reference https://helm.sh/docs/topics/charts/

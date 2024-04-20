@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "echoapp.service.name" . }}
+  labels:
+    app: {{ include "echoapp.fullname" . }}
+spec:
+  type: {{ include "echoapp.service.type" . }}
+  ports:
+    - port: {{ include "echoapp.service.port" . }}
+      targetPort: {{ include "echoapp.deployment.port" . }}
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ include "echoapp.fullname" . }}-app
