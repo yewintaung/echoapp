@@ -1,4 +1,6 @@
-fullnameOverride: 
+echo:
+
+appName: 
 
 service:
   name:
@@ -9,4 +11,3 @@ deployment:
   name:
   replicas:
   port:
-  echo:

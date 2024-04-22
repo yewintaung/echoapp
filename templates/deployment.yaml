@@ -18,7 +18,7 @@ spec:
         - name: {{ include "echoapp.deployment.name" . }}-container
           image: hashicorp/http-echo:1.0.0
           args:
-            - -text="{{ default "HelloCloud version 1" .Values.deployment.echo }}"
+            - -text="{{ default "HelloCloud version 1" .Values.echo }}"
             - -listen=:{{ include "echoapp.deployment.port" . }}
           ports:
             - containerPort: {{ include "echoapp.deployment.port" . }}
