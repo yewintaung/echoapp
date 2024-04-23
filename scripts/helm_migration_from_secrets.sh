@@ -2,6 +2,7 @@
 
 # Run the kubectl command and store the output
 output=$(kubectl get secrets -l owner=helm --all-namespaces)
+OUTPUT_FILE=migration_output.txt
 
 # Extracting the headers to get column names
 headers=$(echo "$output" | head -n 1)
@@ -46,7 +47,11 @@ echo "$output" | while IFS= read -r line; do
     modifiedAt=$(kubectl -n $namespace get secret $name -o jsonpath='{.metadata.labels.modifiedAt}')
 
     echo "INSERT INTO releases_v1 (key, type, body, name, namespace, version, status, owner, createdat, modifiedat)
-    VALUES ('$name', '$type', '$body', '$release_name', '$namespace', $version, '$status', '$owner', $creationEpochTime, $modifiedAt);" >> migration_output.txt
+    VALUES ('$name', '$type', '$body', '$release_name', '$namespace', $version, '$status', '$owner', $creationEpochTime, $modifiedAt);" >> $OUTPUT_FILE
 
 done
 
+PWD=$(pwd)
+OUTPUT_FILE="$PWD/$OUTPUT_FILE"
+
+echo "Generated file in $OUTPUT_FILE, Happy Helming 🐱"

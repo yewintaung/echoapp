@@ -1,21 +1,19 @@
-NAMESPACE=echoapp
+NAMESPACE=default
+MAX_RELEASE=3
+RELEASE_NAME=echoapp
 
 # helm install
-helm install echoapp . -n $NAMESPACE
-
+helm install $RELEASE_NAME . -n $NAMESPACE
 sleep 3
 echo
 
-
-MAX=3
-for i in $(seq 2 $MAX)
+# helm upgrade
+for i in $(seq 2 $MAX_RELEASE)
 do
   echo "Running version $i"
   sleep 0.5
 
-  # helm upgrade
-  helm upgrade echoapp . -n $NAMESPACE --set echo="HelloCloud Version $i"
+  helm upgrade $RELEASE_NAME . -n $NAMESPACE --set echo="HelloCloud Version $i"
   sleep 2
   echo
 done
-
